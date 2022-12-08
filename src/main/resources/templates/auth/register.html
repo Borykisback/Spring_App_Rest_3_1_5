@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Register form</title>
+</head>
+<body>
+  <form th:method="POST" th:action="@{/auth/register}" th:object="${rolePage}">
+    <label>Введите Ваш логин</label>
+    <input type="text" th:field="*{login}" id="login" placeholder="Логин" required >
+    <div style="color: #670101" th:if="${#fields.hasErrors('login')}" th:errors="*{login}">Имя уже используют</div>
+    <br/>
+    <label>Введите Ваш пароль</label>
+    <input type="password" th:field="*{password}" id="password" placeholder="Введите пароль" required >
+    <br/>
+    <label>Имя</label>
+    <input type="text" th:field="*{firstName}" required >
+    <br/>
+    <label>Фамилия</label>
+    <input type="text" th:field="*{lastName}" required >
+    <br/>
+    <label>Возраст</label>
+    <input type="text" th:field="*{age}" required >
+    <br/>
+    <button type="submit" value="Отправить">Отправить</button>
+  </form>
+  <a th:href="@{/auth/login}">Вернутся</a>
+</body>
+</html>
