@@ -7,6 +7,7 @@ import ru.spring.SpringApp.model.User;
 import java.util.Optional;
 
 @Repository
-public interface UsersOptional extends JpaRepository<User, Integer> {
+public interface UserOptional extends JpaRepository<User, Long> {
     Optional<User> findByLogin(String login);
+
 }

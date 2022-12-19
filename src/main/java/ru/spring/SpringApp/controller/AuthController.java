@@ -18,33 +18,8 @@ import javax.validation.Valid;
 @RequestMapping("/auth")
 public class AuthController {
 
-    private final RegisterService registerService;
-    private final UsersValidator usersValidator;
-
-    @Autowired
-    public AuthController(RegisterService registerService, UsersValidator usersValidator) {
-        this.registerService = registerService;
-        this.usersValidator = usersValidator;
-    }
-
     @GetMapping("/login")
     public String loginPage() {
         return "/auth/login";
-    }
-
-    @GetMapping("/register")
-    public String registerPage(@ModelAttribute("rolePage") User user) {
-        return "/auth/register";
-    }
-
-    @PostMapping("/register")
-    public String performRegister(@ModelAttribute("rolePage") @Valid User user, BindingResult bindingResult) {
-        usersValidator.validate(user, bindingResult);
-
-        if (bindingResult.hasErrors())
-            return "/auth/register";
-
-        registerService.register(user);
-        return "redirect:/auth/login";
     }
 }

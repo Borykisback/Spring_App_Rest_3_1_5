@@ -31,8 +31,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // конфигурация авторизации то есть юзер или админ
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/main/admin", "/main/{id}/editUser").hasRole("ADMIN")
-                .antMatchers("/auth/login", "/auth/register", "/error").permitAll()
+                .antMatchers("/main/admin", "/main/{id}/editUser", "/main/addNewUser").hasRole("ADMIN")
+                .antMatchers("/auth/login", "/error").permitAll()
                 .anyRequest().hasAnyRole("USER", "ADMIN")
                 .and()
                 .formLogin()

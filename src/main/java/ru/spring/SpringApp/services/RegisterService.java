@@ -6,27 +6,23 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.spring.SpringApp.model.Role;
 import ru.spring.SpringApp.model.User;
-import ru.spring.SpringApp.optional.UsersOptional;
+import ru.spring.SpringApp.optional.UserOptional;
 
 import javax.persistence.EntityManager;
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class RegisterService {
-    private final UsersOptional usersRepository;
+    private final UserOptional usersRepository;
     private final RoleService roleService;
     private final EntityManager entityManager;
     private final PasswordEncoder passwordEncoder;
-    private final UsersService usersService;
 
     @Autowired
-    public RegisterService(UsersOptional usersRepository, RoleService roleService, EntityManager entityManager, PasswordEncoder passwordEncoder, UsersService usersService) {
+    public RegisterService(UserOptional usersRepository, RoleService roleService, EntityManager entityManager, PasswordEncoder passwordEncoder) {
         this.usersRepository = usersRepository;
         this.roleService = roleService;
         this.entityManager = entityManager;
         this.passwordEncoder = passwordEncoder;
-        this.usersService = usersService;
     }
 
     @Transactional
@@ -35,17 +31,15 @@ public class RegisterService {
             entityManager.persist(new Role(1L, "ROLE_ADMIN"));
             entityManager.persist(new Role(2L, "ROLE_USER"));
         }
-        List<Role> lists = new ArrayList<>(); //Выдача роли (нужно придумать что бы первому пользователю выдавалась сразу админка)
-        if (usersService.listUsers().isEmpty()) {
-            lists.add(roleService.getRoleById(1L));
-        } else {
-            lists.add(roleService.getRoleById(2L));
-        }
-        user.setRolesFull(lists);
+
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         usersRepository.save(user);
     }
 
-
-
+    @Transactional
+    public void updateUser(User user, Long id) {
+        user.setId_user(id);
+        user.setPassword(usersRepository.getById(id).getPassword());
+        entityManager.merge(user);
+    }
 }

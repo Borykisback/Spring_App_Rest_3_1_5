@@ -34,6 +34,6 @@ public class UsersValidator implements Validator {
         } catch (UsernameNotFoundException ignored) {
             return;
         }
-            errors.rejectValue("login", "", "Уже существует");
+            errors.rejectValue("login", "", "Email Уже существует");
     }
 }
