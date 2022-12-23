@@ -11,7 +11,7 @@ public class Role implements GrantedAuthority {
 
     @Id
     @Column(name = "id_role")
-    private Long id_role;
+    private Long idRole;
 
     @Column(name = "role")
     private String role;
@@ -24,17 +24,17 @@ public class Role implements GrantedAuthority {
 
     public Role() {}
 
-    public Role(Long id_role, String role) {
-        this.id_role = id_role;
+    public Role(Long idRole, String role) {
+        this.idRole = idRole;
         this.role = role;
     }
 
-    public Long getId_role() {
-        return id_role;
+    public Long getIdRole() {
+        return idRole;
     }
 
-    public void setId_role(Long id_role) {
-        this.id_role = id_role;
+    public void setIdRole(Long idRole) {
+        this.idRole = idRole;
     }
 
     public String getRole() {
@@ -48,7 +48,7 @@ public class Role implements GrantedAuthority {
     @Override
     public String toString() {
         return "Role{" +
-                "id_role=" + id_role +
+                "id_role=" + idRole +
                 ", role='" + role + '\'' +
                 '}';
     }

@@ -6,17 +6,17 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import ru.spring.SpringApp.model.User;
-import ru.spring.SpringApp.optional.UserOptional;
+import ru.spring.SpringApp.repository.UserRepository;
 
 import java.util.Optional;
 
 @Service
 public class LoginDetailsService implements UserDetailsService {
 
-    private final UserOptional usersDao;
+    private final UserRepository usersDao;
 
     @Autowired
-    public LoginDetailsService(UserOptional usersRepository) {
+    public LoginDetailsService(UserRepository usersRepository) {
         this.usersDao = usersRepository;
     }
 

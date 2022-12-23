@@ -15,13 +15,6 @@ import ru.spring.SpringApp.services.RoleService;
 @RequestMapping(value = "/main")
 public class UserController {
 
-    private final RoleService roleService;
-
-    @Autowired
-    public UserController(RoleService roleService) {
-        this.roleService = roleService;
-    }
-
     @GetMapping()
     public String userList(Model model, @AuthenticationPrincipal User user) {
         model.addAttribute("authUser", user);

@@ -9,7 +9,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.util.*;
-import java.util.stream.Stream;
 
 @Entity
 @Table(name = "user")
@@ -18,7 +17,7 @@ public class User implements UserDetails{
     @Id
     @Column(name = "id_user")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_user;
+    private Long idUser;
 
     @Column(name = "first_name")
     private String firstName;
@@ -52,6 +51,15 @@ public class User implements UserDetails{
         this.password = password;
     }
 
+    public User(String firstName, String lastName, int age, String login, String password, List<Role> rolesFull) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.login = login;
+        this.password = password;
+        this.rolesFull = rolesFull;
+    }
+
     public String getRoleByString() {
         StringBuilder st = new StringBuilder();
         for (Role i: getRolesFull()) {
@@ -60,12 +68,12 @@ public class User implements UserDetails{
         return st.toString();
     }
 
-    public Long getId_user() {
-        return id_user;
+    public Long getIdUser() {
+        return idUser;
     }
 
-    public void setId_user(Long id_user) {
-        this.id_user = id_user;
+    public void setIdUser(Long idUser) {
+        this.idUser = idUser;
     }
 
     public String getFirstName() {
@@ -151,7 +159,7 @@ public class User implements UserDetails{
     @Override
     public String toString() {
         return "Users{" +
-                "id_user=" + id_user +
+                "idUser=" + idUser +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", age=" + age +

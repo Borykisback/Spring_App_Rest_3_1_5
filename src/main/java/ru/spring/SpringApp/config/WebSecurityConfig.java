@@ -8,7 +8,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import ru.spring.SpringApp.services.LoginDetailsService;
 
@@ -31,7 +30,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // конфигурация авторизации то есть юзер или админ
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/main/admin", "/main/{id}/editUser", "/main/addNewUser").hasRole("ADMIN")
+                .antMatchers("/main/admin", "/api/admin/*").hasRole("ADMIN")
                 .antMatchers("/auth/login", "/error").permitAll()
                 .anyRequest().hasAnyRole("USER", "ADMIN")
                 .and()
